@@ -24,7 +24,8 @@ current_tmux_server_pid() {
 
 all_tmux_processes() {
 	# ignores `tmux source-file .tmux.conf` command used to reload tmux.conf
-	ps -Ao "command pid" |
+	ps -Ao "command user pid" |
+		\grep `whoami` |
 		\grep "^tmux" |
 		\grep -v "^tmux source"
 }
